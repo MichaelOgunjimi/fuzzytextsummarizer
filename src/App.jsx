@@ -42,6 +42,35 @@ const App = () => {
     const uid = saveSummaries ? localStorage.getItem('userUid') : '';
     setIsSavingEnabled(saveSummaries);
     setUserUid(uid);
+
+    // If saving is disabled, clear summaries
+    if (!saveSummaries) {
+      setSummaries([]);
+    }
+  }, []);
+
+  // Listen for changes to the saveSummaries setting
+  useEffect(() => {
+    const handleSaveSummariesChange = () => {
+      const saveSummaries = localStorage.getItem('saveSummaries') === 'true';
+      const uid = saveSummaries ? localStorage.getItem('userUid') : '';
+      setIsSavingEnabled(saveSummaries);
+      setUserUid(uid);
+
+      // If saving is disabled, clear summaries from the UI
+      if (!saveSummaries) {
+        setSummaries([]);
+      }
+    };
+
+    window.addEventListener('saveSummariesChanged', handleSaveSummariesChange);
+
+    return () => {
+      window.removeEventListener(
+        'saveSummariesChanged',
+        handleSaveSummariesChange,
+      );
+    };
   }, []);
 
   useEffect(() => {

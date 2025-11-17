@@ -71,7 +71,7 @@ const SummaryView = ({ summaries }) => {
   };
 
   return (
-    <div className="flex h-screen bg-background-50">
+    <div className="flex h-screen bg-background-100">
       {sidebarOpen && <Sidebar summaries={summaries} id={id} />}
       <ToggleButton sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <MainContent
@@ -90,11 +90,11 @@ const SummaryView = ({ summaries }) => {
 
 const ToggleButton = ({ sidebarOpen, setSidebarOpen }) => (
   <div
-    className={`absolute left-0 top-1/2 transform -translate-y-1/2 ${sidebarOpen ? 'translate-x-64' : 'translate-x-0'}`}
+    className={`absolute left-0 top-1/2 transform -translate-y-1/2 transition-transform duration-300 z-20 ${sidebarOpen ? 'translate-x-64' : 'translate-x-0'}`}
   >
     <button
       onClick={() => setSidebarOpen(!sidebarOpen)}
-      className="bg-blue-700 hover:bg-blue-800 p-2 rounded-full text-white focus:outline-none"
+      className="bg-primary-600 hover:bg-primary-700 p-3 rounded-full text-background-50 focus:outline-none shadow-lg transition-all duration-200 hover:shadow-xl"
     >
       {sidebarOpen ? <LeftArrowIcon /> : <RightArrowIcon />}
     </button>
@@ -122,11 +122,11 @@ const MainContent = ({
 
   return (
     <div
-      className={`flex-1 ${sidebarOpen ? 'ml-72' : 'ml-0'} mb-16 transition-margin duration-300`}
+      className={`flex-1 ${sidebarOpen ? 'ml-72' : 'ml-0'} mb-16 transition-all duration-300`}
     >
-      <div className="p-4 mx-20 flex flex-col h-full">
+      <div className="p-6 mx-20 flex flex-col h-full">
         <div
-          className="flex-1 overflow-auto scrollbar h-full bg-background-100 p-5"
+          className="flex-1 overflow-auto scrollbar h-full bg-background-50 p-6 rounded-xl border border-background-300"
           ref={summaryContentRef}
         >
           {currentSummary.length === 0
@@ -169,7 +169,7 @@ const MainContent = ({
           {isLoading && (
             <div className="flex items-center justify-start gap-4 align-center">
               <Spinner size={3} />
-              <p className="text-text-600">Summarizing...</p>
+              <p className="text-text-700 font-medium">Summarizing...</p>
             </div>
           )}
         </div>
