@@ -5,6 +5,7 @@ import axios from 'axios';
 import PickedFile from './PickedFile';
 import uploadIcon from '/upload.svg';
 import Spinner from './Spinner.jsx';
+import { API_ENDPOINTS } from '../../config/api.js';
 
 const InputComponent = ({ file }) => {
   const [internalFile, setInternalFile] = useState(null);
@@ -13,6 +14,7 @@ const InputComponent = ({ file }) => {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
+  const textareaRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +34,11 @@ const InputComponent = ({ file }) => {
     setText(e.target.value);
     setInternalFile(null);
     setMessage('');
+    
+    // Auto-scroll textarea to bottom as user types
+    if (textareaRef.current) {
+      textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+    }
   };
 
   const handlePercentageChange = (e) => {
@@ -52,22 +59,29 @@ const InputComponent = ({ file }) => {
     formData.append('file', internalFile);
     formData.append('percentage', Number(percentage));
 
+    console.log('📤 Uploading file to:', API_ENDPOINTS.UPLOAD);
     setIsLoading(true);
     setMessage('Uploading...');
     try {
-      const response = await axios.post(
-        'https://www.api.lingosummar.com/api/v1/upload',
-        formData,
-        {
-          headers: { ...headers, 'Content-Type': 'multipart/form-data' },
-        },
-      );
+      const response = await axios.post(API_ENDPOINTS.UPLOAD, formData, {
+        headers: { ...headers, 'Content-Type': 'multipart/form-data' },
+      });
+      console.log('✅ Upload successful:', response.data);
       setMessage(response.data.message);
       // Navigate to the summary view page after receiving the response
       if (response.data.id) {
+        // Dispatch event to notify App.jsx to refresh summaries list
+        window.dispatchEvent(new Event('summaryCreated'));
         navigate(`/summary/${response.data.id}`);
       }
     } catch (error) {
+      console.error('❌ Upload error:', error);
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response,
+        code: error.code,
+        url: API_ENDPOINTS.UPLOAD,
+      });
       setMessage(`Error: ${error.response?.data.error || error.message}`);
     } finally {
       setIsLoading(false);
@@ -76,20 +90,31 @@ const InputComponent = ({ file }) => {
 
   const summarizeText = async () => {
     const headers = { 'X-User-UID': localStorage.getItem('userUid') };
+    console.log('📝 Summarizing text to:', API_ENDPOINTS.SUMMARIZE);
     setIsLoading(true);
     setMessage('Summarizing...');
     try {
       const response = await axios.post(
-        'https://www.api.lingosummar.com/api/v1/summarize',
+        API_ENDPOINTS.SUMMARIZE,
         { text, percentage: Number(percentage) },
         { headers },
       );
+      console.log('✅ Summarize successful:', response.data);
       setMessage(response.data.message);
       // Navigate to the summary view page after receiving the response
       if (response.data.id) {
+        // Dispatch event to notify App.jsx to refresh summaries list
+        window.dispatchEvent(new Event('summaryCreated'));
         navigate(`/summary/${response.data.id}`);
       }
     } catch (error) {
+      console.error('❌ Summarize error:', error);
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response,
+        code: error.code,
+        url: API_ENDPOINTS.SUMMARIZE,
+      });
       setMessage(`Error: ${error.response?.data.error || error.message}`);
     } finally {
       setIsLoading(false);
@@ -97,7 +122,32 @@ const InputComponent = ({ file }) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto relative">
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="absolute inset-0 bg-background-900 bg-opacity-60 backdrop-blur-sm rounded-3xl z-50 flex items-center justify-center animate-fadeIn">
+          <div className="bg-background-50 rounded-2xl p-8 shadow-2xl border-2 border-primary-500 flex flex-col items-center gap-4 animate-scaleIn max-w-sm">
+            <div className="relative">
+              <Spinner size={3} color="primary" />
+              <div className="absolute inset-0 animate-ping opacity-20">
+                <Spinner size={3} color="primary" />
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-xl font-bold text-text-800 mb-2">
+                {internalFile ? '📤 Uploading File' : '✨ Analyzing Text'}
+              </p>
+              <p className="text-sm text-text-600 mb-3">
+                {message || 'Please wait while we process your request...'}
+              </p>
+              <div className="w-full bg-background-200 rounded-full h-1.5 overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-600 to-primary-700 rounded-full animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main Input Card */}
       <div className="bg-gradient-to-br from-background-50 to-background-100 rounded-3xl shadow-2xl p-8 border border-background-300 backdrop-blur-sm">
         {/* Input Area */}
@@ -109,6 +159,7 @@ const InputComponent = ({ file }) => {
           ) : (
             <div className="relative">
               <textarea
+                ref={textareaRef}
                 value={text}
                 onChange={handleTextChange}
                 className="w-full bg-background-100 border-2 border-background-300 rounded-2xl shadow-inner p-6 focus:outline-none focus:ring-4 focus:ring-primary-500 focus:ring-opacity-30 focus:border-primary-500 resize-none text-text-800 placeholder-text-400 text-lg transition-all duration-200"
