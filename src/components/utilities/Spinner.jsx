@@ -1,14 +1,17 @@
 import React from 'react';
 
-export default function Spinner({ size = 1 }) {
-  // Default size is 5 if not specified
+export default function Spinner({ size = 1, color = 'primary' }) {
+  // Default size is 1rem if not specified
+  const colorClass =
+    color === 'white' ? 'text-background-50' : 'text-primary-600';
+
   return (
     <svg
-      className={`animate-spin text-white`}
+      className={`animate-spin ${colorClass}`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      style={{ height: `${size}rem`, width: `${size}rem` }} // Using inline styles to set the size
+      style={{ height: `${size}rem`, width: `${size}rem` }}
     >
       <circle
         className="opacity-25"
