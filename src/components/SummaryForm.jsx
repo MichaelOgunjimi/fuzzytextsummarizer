@@ -37,7 +37,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
   return (
     <div
       {...getRootProps()}
-      className="relative flex flex-col min-h-screen bg-gradient-to-br from-background-100 via-background-50 to-background-100 overflow-hidden"
+      className="relative flex flex-col min-h-screen bg-gradient-to-br from-background-100 via-background-50 to-background-100"
     >
       <input {...getInputProps()} />
 
@@ -269,26 +269,48 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                 )}
               </div>
             ) : (
-              <div className="text-center py-12">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-background-200 flex items-center justify-center">
-                  <svg
-                    className="w-10 h-10 text-text-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
+              <div className="text-center py-16 px-4">
+                <div className="max-w-md mx-auto">
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-background-200 to-background-300 flex items-center justify-center shadow-inner">
+                    <svg
+                      className="w-12 h-12 text-text-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-text-700 text-xl font-bold mb-2">
+                    No summaries yet
+                  </p>
+                  <p className="text-text-500 text-sm mb-6">
+                    Create your first summary using the form above
+                  </p>
+                  <div className="flex items-center justify-center gap-2 text-text-600">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                      />
+                    </svg>
+                    <span className="text-sm">
+                      Start by typing or uploading
+                    </span>
+                  </div>
                 </div>
-                <p className="text-text-500 text-lg">No summaries yet</p>
-                <p className="text-text-400 text-sm mt-2">
-                  Create your first summary above
-                </p>
               </div>
             )}
           </div>
@@ -297,28 +319,47 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
 
       {!isSavingEnabled && (
         <div className="bg-background-50 border-t border-background-300 py-12 px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-background-200 flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-text-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center py-8 px-6 rounded-2xl bg-background-100 border-2 border-background-300 shadow-lg">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-background-200 to-background-300 flex items-center justify-center shadow-inner">
+                <svg
+                  className="w-10 h-10 text-text-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-text-800 mb-3">
+                History Disabled
+              </h3>
+              <p className="text-text-600 mb-4 max-w-md mx-auto">
+                Enable saving in the menu to store and access your previous
+                summaries
+              </p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-background-200 rounded-full text-sm text-text-600">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Your summaries will not be saved</span>
+              </div>
             </div>
-            <h3 className="text-2xl font-bold text-text-800 mb-2">
-              History Disabled
-            </h3>
-            <p className="text-text-600">
-              Enable saving in the menu to access your previous summaries
-            </p>
           </div>
         </div>
       )}

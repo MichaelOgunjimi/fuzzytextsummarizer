@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Logo from '/lingosummer-logo.svg';
@@ -7,6 +7,7 @@ import Toggle from './utilities/Toggle.jsx';
 const Header = () => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isToggled, setToggled] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const saveSummaries = localStorage.getItem('saveSummaries') === 'true';
@@ -22,6 +23,23 @@ const Header = () => {
 
     setToggled(saveSummaries);
   }, []);
+
+  // Handle click outside to close menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuVisible(false);
+      }
+    };
+
+    if (isMenuVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuVisible]);
 
   const toggleState = () => {
     const newToggledState = !isToggled;
@@ -56,7 +74,7 @@ const Header = () => {
         </Link>
 
         {/* Right Side - Menu Button */}
-        <div className="relative">
+        <div className="relative" ref={menuRef}>
           <button
             onClick={() => setMenuVisible(!isMenuVisible)}
             className="flex items-center gap-3 px-4 py-2 rounded-xl bg-background-200 hover:bg-background-300 transition-all duration-200 border border-background-300 hover:border-primary-500 group"

@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npm:backend\" \"npm:frontend\"",
+    "start": "vite",
     "frontend": "vite",
-    "backend": "cd .. backend && flask run",
+    "backend": "cd ../backend && source .venv/bin/activate && flask run",
+    "dev": "concurrently \"npm:backend\" \"npm:frontend\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview"
