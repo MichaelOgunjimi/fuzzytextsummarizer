@@ -125,8 +125,8 @@ const InputComponent = ({ file }) => {
     <div className="w-full max-w-4xl mx-auto relative">
       {/* Loading Overlay */}
       {isLoading && (
-        <div className="absolute inset-0 bg-surface-950 bg-opacity-60 backdrop-blur-sm rounded z-50 flex items-center justify-center animate-fadeIn">
-          <div className="bg-surface-50 rounded p-8 border-2 border-orange-500 flex flex-col items-center gap-4 animate-scaleIn max-w-sm w-full mx-4">
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded z-50 flex items-center justify-center animate-fadeIn">
+          <div className="bg-surface-200 rounded p-8 border-2 border-orange-500 flex flex-col items-center gap-4 animate-scaleIn max-w-sm w-full mx-4">
             <div className="relative">
               <Spinner size={3} color="primary" />
               <div className="absolute inset-0 animate-ping opacity-20">
