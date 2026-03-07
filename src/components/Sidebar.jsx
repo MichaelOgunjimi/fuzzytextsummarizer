@@ -24,7 +24,7 @@ export default function Sidebar({ summaries, id, onClose }) {
       {/* Mobile backdrop */}
       <div className="fixed inset-0 bg-black/50 z-20 md:hidden" onClick={onClose} />
 
-      <aside className="fixed top-0 left-0 h-screen w-[280px] md:w-72 bg-surface-100 border-r border-surface-300 flex flex-col z-30 transition-all duration-300 ease-in-out">
+      <aside className="fixed top-0 left-0 h-screen w-full sm:w-[280px] md:w-72 bg-surface-100 border-r border-surface-300 flex flex-col z-30 transition-all duration-300 ease-in-out">
 
         {/* Top bar */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-surface-300">
