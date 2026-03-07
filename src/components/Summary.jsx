@@ -41,20 +41,20 @@ export default function Summary({ summary, isOriginal }) {
 
   return (
     <div
-      className={`p-6 rounded-xl mb-4 relative flex flex-col gap-4 border transition-all duration-200 ${isOriginal ? 'bg-background-200 border-background-400' : 'bg-background-100 border-background-300'}`}
+      className={`p-6 rounded mb-4 relative flex flex-col gap-4 ${isOriginal ? 'bg-surface-200' : 'bg-surface-100'}`}
     >
       <div className="flex items-center gap-2 justify-end">
         <div className="flex gap-3">
           <button
             onClick={copyToClipboard}
-            className="text-text-600 hover:text-primary-700 transition-colors p-2 hover:bg-background-200 rounded-lg"
+            className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"
             title="Copy to clipboard"
           >
             <CopyIcon />
           </button>
           <button
             onClick={toggleSpeak}
-            className="text-text-600 hover:text-primary-700 transition-colors p-2 hover:bg-background-200 rounded-lg"
+            className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"
             title="Read aloud"
           >
             <SpeakerIcon />
@@ -64,7 +64,7 @@ export default function Summary({ summary, isOriginal }) {
           <button
             onMouseEnter={() => setShowDetails(true)}
             onMouseLeave={() => setShowDetails(false)}
-            className="text-text-600 hover:text-primary-700 transition-colors p-2 hover:bg-background-200 rounded-lg"
+            className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"
             title="View details"
           >
             <InfoIcon />
@@ -73,9 +73,9 @@ export default function Summary({ summary, isOriginal }) {
       </div>
 
       {isOriginal ? (
-        <h3 className="text-xl font-bold text-text-800">Original Text</h3>
+        <h3 className="font-display text-lg text-text-900">// original_text</h3>
       ) : (
-        <h3 className="text-xl font-bold text-text-800">Summarized Text</h3>
+        <h3 className="font-display text-lg text-text-900">// summarized_text</h3>
       )}
 
       {isOriginal && summary.uploaded_filename ? (
@@ -89,12 +89,12 @@ export default function Summary({ summary, isOriginal }) {
       )}
 
       {showDetails && (
-        <div className="absolute top-16 right-5 p-3 bg-background-800 text-background-50 rounded-lg shadow-xl border border-background-700">
+        <div className="absolute top-16 right-5 p-3 bg-surface-900 text-surface-50 rounded shadow-xl">
           <p className="text-sm">Words: {summary.words}</p>
           <p className="text-sm">Percentage: {summary.percentage}%</p>
         </div>
       )}
-      <div className="text-text-500 text-sm">
+      <div className="text-text-400 text-sm">
         <p>{formatDate(summary.created_at)}</p>
       </div>
     </div>

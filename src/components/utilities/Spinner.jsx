@@ -3,7 +3,7 @@ import React from 'react';
 export default function Spinner({ size = 1, color = 'primary' }) {
   // Default size is 1rem if not specified
   const colorClass =
-    color === 'white' ? 'text-background-50' : 'text-primary-600';
+    color === 'white' ? 'text-white' : 'text-orange-500';
 
   return (
     <svg

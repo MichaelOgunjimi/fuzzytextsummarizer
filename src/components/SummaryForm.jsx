@@ -37,17 +37,17 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
   return (
     <div
       {...getRootProps()}
-      className="relative flex flex-col min-h-screen bg-gradient-to-br from-background-100 via-background-50 to-background-100"
+      className="relative flex flex-col min-h-screen bg-surface-100"
     >
       <input {...getInputProps()} />
 
       {/* Drag and Drop Overlay */}
       {isDragActive && (
-        <div className="fixed inset-0 bg-primary-900 bg-opacity-10 backdrop-blur-sm flex items-center justify-center z-50 border-8 border-dashed border-primary-600 m-4 rounded-3xl animate-pulse">
+        <div className="fixed inset-0 bg-orange-500 bg-opacity-10 backdrop-blur-sm flex items-center justify-center z-50 border-4 border-dashed border-orange-500 m-4 rounded animate-pulse">
           <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary-600 flex items-center justify-center">
+            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-orange-500 flex items-center justify-center">
               <svg
-                className="w-12 h-12 text-background-50"
+                className="w-12 h-12 text-black"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -60,58 +60,58 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                 />
               </svg>
             </div>
-            <p className="text-3xl text-text-800 font-bold mb-2">
+            <p className="font-display text-3xl text-text-950 font-bold mb-2">
               Drop your file here
             </p>
-            <p className="text-lg text-text-600">We'll handle the rest</p>
+            <p className="text-base text-text-500">We'll handle the rest</p>
           </div>
         </div>
       )}
 
       {/* Hero Section */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-12 md:py-16">
         <div className="max-w-5xl w-full">
           {/* Main Heading */}
-          <div className="text-center mb-12 space-y-4">
-            <h1 className="text-6xl md:text-7xl font-black text-text-900 mb-4 tracking-tight leading-tight">
+          <div className="text-center mb-10 md:mb-12 space-y-4">
+            <h1 className="font-display text-5xl md:text-7xl font-bold text-text-950 tracking-tight leading-tight">
               Summarize Anything
-              <span className="block text-5xl md:text-6xl mt-2 bg-gradient-to-r from-primary-700 via-primary-600 to-primary-500 bg-clip-text text-transparent">
+              <span className="block text-4xl md:text-6xl mt-2 text-orange-500">
                 In Seconds
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-text-600 max-w-2xl mx-auto font-light">
+            <p className="text-base md:text-lg text-text-500 max-w-2xl mx-auto">
               Transform lengthy documents and text into concise, meaningful
               summaries with AI-powered precision
             </p>
 
             {/* Fuzzy Logic Badge */}
             <div className="flex items-center justify-center gap-2 pt-4">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-background-100 rounded-full border border-background-300 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-surface-200 rounded-full">
                 <svg
-                  className="w-4 h-4 text-primary-700"
+                  className="w-4 h-4 text-orange-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="text-sm font-semibold text-text-700">
-                  Powered by Fuzzy Logic
+                <span className="text-sm font-semibold text-text-600">
+                  // powered_by_fuzzy_logic
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Input Component - Now the star of the show */}
-          <div className="mb-12">
+          {/* Input Component */}
+          <div className="mb-10 md:mb-12">
             <InputComponent file={file} />
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-            <div className="text-center p-6 rounded-2xl bg-background-50 border border-background-300 hover:border-primary-500 transition-all duration-300 hover:shadow-lg group">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 max-w-4xl mx-auto">
+            <div className="text-center p-6 rounded bg-surface-200 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <svg
-                  className="w-7 h-7 text-background-50"
+                  className="w-7 h-7 text-black"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -124,18 +124,18 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-text-800 mb-2">
+              <h3 className="font-display text-lg font-semibold text-text-900 mb-2">
                 Lightning Fast
               </h3>
-              <p className="text-sm text-text-600">
+              <p className="text-sm text-text-500">
                 Get summaries in seconds, not minutes
               </p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-background-50 border border-background-300 hover:border-primary-500 transition-all duration-300 hover:shadow-lg group">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div className="text-center p-6 rounded bg-surface-200 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <svg
-                  className="w-7 h-7 text-background-50"
+                  className="w-7 h-7 text-black"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -148,16 +148,18 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-text-800 mb-2">Accurate</h3>
-              <p className="text-sm text-text-600">
+              <h3 className="font-display text-lg font-semibold text-text-900 mb-2">
+                Accurate
+              </h3>
+              <p className="text-sm text-text-500">
                 AI-powered for precise results
               </p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-background-50 border border-background-300 hover:border-primary-500 transition-all duration-300 hover:shadow-lg group">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div className="text-center p-6 rounded bg-surface-200 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <svg
-                  className="w-7 h-7 text-background-50"
+                  className="w-7 h-7 text-black"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -170,10 +172,10 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-text-800 mb-2">
+              <h3 className="font-display text-lg font-semibold text-text-900 mb-2">
                 Multiple Formats
               </h3>
-              <p className="text-sm text-text-600">
+              <p className="text-sm text-text-500">
                 TXT, PDF, DOC, DOCX supported
               </p>
             </div>
@@ -183,19 +185,19 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
 
       {/* Previous Summaries Section */}
       {isSavingEnabled && (
-        <div className="bg-background-50 border-t border-background-300 py-12 px-4">
+        <div className="bg-surface-50 py-12 px-4">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-3xl text-text-800 font-bold mb-2">
+                <h2 className="font-display text-2xl md:text-3xl text-text-900 font-bold mb-2">
                   Your Summaries
                 </h2>
-                <p className="text-text-600">
+                <p className="text-text-500 text-sm">
                   Quick access to your recent work
                 </p>
               </div>
               <svg
-                className="w-8 h-8 text-primary-600"
+                className="w-8 h-8 text-orange-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -214,30 +216,30 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                 <Spinner size={3} />
               </div>
             ) : summaries.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 {Object.entries(groupedSummaries).map(
                   ([key, group]) =>
                     group.length > 0 && (
                       <div key={key} className="space-y-3">
                         <h3 className="text-xs text-text-500 font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
-                          <span className="w-8 h-0.5 bg-primary-600"></span>
+                          <span className="w-1 h-4 bg-orange-500 rounded-full"></span>
                           {key === 'today'
-                            ? 'Today'
+                            ? '// today'
                             : key === 'lastSevenDays'
-                              ? 'Last 7 Days'
-                              : 'Older'}
+                              ? '// last_7_days'
+                              : '// older'}
                         </h3>
                         <div className="space-y-2">
                           {group.slice(0, 5).map((summary) => (
                             <Link
                               key={summary.id}
                               to={`/summary/${summary.id}`}
-                              className="block p-4 bg-background-100 hover:bg-background-200 rounded-xl transition-all duration-200 border border-background-300 hover:border-primary-500 hover:shadow-md group"
+                              className="block p-4 bg-surface-200 hover:bg-surface-300 rounded transition-all duration-200 group"
                             >
                               <div className="flex items-start gap-3">
-                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-600 to-primary-700 flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <div className="w-10 h-10 rounded bg-orange-500 flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
                                   <svg
-                                    className="w-5 h-5 text-background-50"
+                                    className="w-5 h-5 text-black"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -251,7 +253,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                                   </svg>
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="font-semibold text-text-800 truncate group-hover:text-primary-700 transition-colors">
+                                  <p className="font-semibold text-text-900 truncate group-hover:text-orange-500 transition-colors">
                                     {summary.title}
                                   </p>
                                   <p className="text-xs text-text-500 mt-1">
@@ -271,7 +273,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
             ) : (
               <div className="text-center py-16 px-4">
                 <div className="max-w-md mx-auto">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-background-200 to-background-300 flex items-center justify-center shadow-inner">
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-surface-200 flex items-center justify-center">
                     <svg
                       className="w-12 h-12 text-text-400"
                       fill="none"
@@ -286,13 +288,13 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                       />
                     </svg>
                   </div>
-                  <p className="text-text-700 text-xl font-bold mb-2">
+                  <p className="font-display text-xl font-bold text-text-900 mb-2">
                     No summaries yet
                   </p>
                   <p className="text-text-500 text-sm mb-6">
                     Create your first summary using the form above
                   </p>
-                  <div className="flex items-center justify-center gap-2 text-text-600">
+                  <div className="flex items-center justify-center gap-2 text-text-500">
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -307,7 +309,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                       />
                     </svg>
                     <span className="text-sm">
-                      Start by typing or uploading
+                      // start_by_typing_or_uploading
                     </span>
                   </div>
                 </div>
@@ -318,10 +320,10 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
       )}
 
       {!isSavingEnabled && (
-        <div className="bg-background-50 border-t border-background-300 py-12 px-4">
+        <div className="bg-surface-50 py-12 px-4">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center py-8 px-6 rounded-2xl bg-background-100 border-2 border-background-300 shadow-lg">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-background-200 to-background-300 flex items-center justify-center shadow-inner">
+            <div className="text-center py-8 px-6 rounded bg-surface-200">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-surface-300 flex items-center justify-center">
                 <svg
                   className="w-10 h-10 text-text-500"
                   fill="none"
@@ -336,14 +338,14 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-text-800 mb-3">
+              <h3 className="font-display text-xl font-bold text-text-900 mb-3">
                 History Disabled
               </h3>
-              <p className="text-text-600 mb-4 max-w-md mx-auto">
+              <p className="text-text-500 mb-4 max-w-md mx-auto">
                 Enable saving in the menu to store and access your previous
                 summaries
               </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-background-200 rounded-full text-sm text-text-600">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-surface-300 rounded-full text-sm text-text-600">
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -357,7 +359,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Your summaries will not be saved</span>
+                <span>// summaries_will_not_be_saved</span>
               </div>
             </div>
           </div>

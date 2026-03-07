@@ -67,7 +67,7 @@ const SummaryView = ({ summaries }) => {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-background-100 via-background-50 to-background-100">
+    <div className="bg-surface-100 min-h-screen">
       {sidebarOpen && <Sidebar summaries={summaries} id={id} />}
       <ToggleButton sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <MainContent
@@ -86,14 +86,14 @@ const SummaryView = ({ summaries }) => {
 
 const ToggleButton = ({ sidebarOpen, setSidebarOpen }) => (
   <div
-    className={`fixed left-0 top-1/2 transform -translate-y-1/2 transition-all duration-300 z-20 ${sidebarOpen ? 'translate-x-72' : 'translate-x-0'}`}
+    className={`fixed left-0 top-1/2 transform -translate-y-1/2 transition-all duration-300 z-40 ${sidebarOpen ? 'translate-x-0 md:translate-x-72' : 'translate-x-0'}`}
   >
     <button
       onClick={() => setSidebarOpen(!sidebarOpen)}
-      className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 p-4 rounded-r-2xl text-background-50 focus:outline-none shadow-2xl transition-all duration-200 hover:shadow-3xl group"
+      className="bg-orange-500 hover:bg-orange-600 text-black p-3 rounded-none rounded-r-[16px] focus:outline-none transition-colors duration-200"
       aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
     >
-      <div className="transform group-hover:scale-110 transition-transform">
+      <div>
         {sidebarOpen ? <LeftArrowIcon /> : <RightArrowIcon />}
       </div>
     </button>
@@ -124,29 +124,29 @@ const MainContent = ({
 
   return (
     <div
-      className={`flex-1 ${sidebarOpen ? 'ml-72' : 'ml-0'} mb-20 transition-all duration-300 ease-in-out`}
+      className={`flex-1 ${sidebarOpen ? 'md:ml-72' : 'ml-0'} mb-24 transition-all duration-300 ease-in-out`}
     >
       <div className="p-4 md:p-8 max-w-6xl mx-auto flex flex-col h-full">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-text-900 mb-2">
+          <h1 className="font-display text-2xl md:text-3xl text-text-950 mb-2">
             Summary Details
           </h1>
-          <p className="text-text-600">
+          <p className="text-text-500">
             Review your original text and generated summaries
           </p>
         </div>
 
         {/* Summaries Container */}
         <div
-          className="flex-1 overflow-auto scrollbar bg-background-50 p-6 md:p-8 rounded-2xl border-2 border-background-300 shadow-xl space-y-6"
+          className="flex-1 overflow-auto scrollbar bg-surface-50 rounded p-4 md:p-6 space-y-6"
           ref={summaryContentRef}
         >
           {currentSummary.length === 0 ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
                 <Spinner size={3} />
-                <p className="text-text-600 mt-4">Loading summary...</p>
+                <p className="text-text-500 mt-4">Loading summary...</p>
               </div>
             </div>
           ) : (
@@ -187,13 +187,13 @@ const MainContent = ({
             )
           )}
           {isLoading && (
-            <div className="flex flex-col items-center justify-center gap-4 p-8 bg-gradient-to-br from-background-100 to-background-200 rounded-xl border border-background-300">
+            <div className="flex flex-col items-center justify-center gap-4 p-8 bg-surface-200 rounded">
               <Spinner size={3} />
               <div className="text-center">
-                <p className="text-text-800 font-semibold text-lg">
+                <p className="text-text-900 font-semibold text-lg">
                   Generating Summary...
                 </p>
-                <p className="text-text-600 text-sm mt-1">
+                <p className="text-text-500 text-sm mt-1">
                   This may take a few moments
                 </p>
               </div>
