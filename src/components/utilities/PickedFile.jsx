@@ -3,11 +3,11 @@ import fileTextIcon from '/file-text.svg';
 
 export default function PickedFile({ fileName, onRemove }) {
   return (
-    <div className="bg-surface-200 rounded p-6 relative transition-all duration-300 group">
-      <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded bg-orange-500 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+    <div className="bg-surface-200 rounded p-4 md:p-6 relative transition-all duration-300 group w-full">
+      <div className="flex items-center gap-3 md:gap-4">
+        <div className="w-12 h-12 md:w-16 md:h-16 rounded bg-orange-500 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
           <svg
-            className="w-8 h-8 text-black"
+            className="w-6 h-6 md:w-8 md:h-8 text-black"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -21,7 +21,7 @@ export default function PickedFile({ fileName, onRemove }) {
           </svg>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-base font-mono font-bold text-text-900 truncate mb-1">
+          <p className="text-sm md:text-base font-mono font-bold text-text-900 truncate mb-1">
             {fileName}
           </p>
           <p className="text-sm font-mono text-text-500">// ready_to_summarize</p>

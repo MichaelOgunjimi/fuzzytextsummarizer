@@ -73,9 +73,9 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
         <div className="max-w-5xl w-full">
           {/* Main Heading */}
           <div className="text-center mb-10 md:mb-12 space-y-4">
-            <h1 className="font-display text-5xl md:text-7xl font-bold text-text-950 tracking-tight leading-tight">
+            <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-bold text-text-950 tracking-tight leading-tight">
               Summarize Anything
-              <span className="block text-4xl md:text-6xl mt-2 text-orange-500">
+              <span className="block text-2xl sm:text-4xl md:text-6xl mt-2 text-orange-500">
                 In Seconds
               </span>
             </h1>
@@ -107,7 +107,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12 max-w-4xl mx-auto">
             <div className="text-center p-6 rounded bg-surface-200 hover:shadow-lg transition-all duration-300 group">
               <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <svg
@@ -216,7 +216,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                 <Spinner size={3} />
               </div>
             ) : summaries.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 {Object.entries(groupedSummaries).map(
                   ([key, group]) =>
                     group.length > 0 && (

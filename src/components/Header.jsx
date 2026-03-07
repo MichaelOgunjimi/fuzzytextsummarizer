@@ -131,7 +131,7 @@ const Header = () => {
 
           {/* Dropdown Menu */}
           {isMenuVisible && (
-            <div className="absolute right-0 mt-3 p-6 bg-surface-50 dark:shadow-2xl rounded w-80 animate-slideDown">
+            <div className="absolute right-0 mt-3 p-4 sm:p-6 bg-surface-50 shadow-lg dark:shadow-2xl rounded w-[calc(100vw-2rem)] sm:w-80 animate-slideDown">
               <div className="mb-4">
                 <h3 className="text-lg font-display uppercase tracking-wide text-text-800 mb-1">
                   // save_history

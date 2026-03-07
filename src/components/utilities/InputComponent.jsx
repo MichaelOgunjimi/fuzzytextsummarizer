@@ -162,7 +162,7 @@ const InputComponent = ({ file }) => {
                 ref={textareaRef}
                 value={text}
                 onChange={handleTextChange}
-                className="w-full bg-surface-200 rounded p-6 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none text-text-900 placeholder-text-400 text-base md:text-lg transition-all duration-200"
+                className="w-full bg-surface-200 rounded p-4 md:p-6 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none text-text-900 placeholder-text-400 text-base md:text-lg transition-all duration-200"
                 style={{ minHeight: '200px', maxHeight: '400px' }}
                 placeholder="// paste_your_text_here or upload a document below..."
                 disabled={!!internalFile}

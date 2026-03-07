@@ -60,10 +60,10 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
   }, [summary.text, displayedText, onTypingComplete]);
 
   return (
-    <div className="p-6 bg-surface-100 rounded mb-4 relative flex flex-col">
-      <div className="flex items-center justify-between mb-4">
+    <div className="p-4 md:p-6 bg-surface-100 rounded mb-4 relative flex flex-col">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
         <h3 className="font-display text-lg text-text-900">// summarized_text</h3>
-        <div className="flex gap-3">
+        <div className="flex gap-2 md:gap-3">
           <button
             onClick={copyToClipboard}
             className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"

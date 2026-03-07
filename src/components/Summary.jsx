@@ -41,10 +41,10 @@ export default function Summary({ summary, isOriginal }) {
 
   return (
     <div
-      className={`p-6 rounded mb-4 relative flex flex-col gap-4 ${isOriginal ? 'bg-surface-200' : 'bg-surface-100'}`}
+      className={`p-4 md:p-6 rounded mb-4 relative flex flex-col gap-3 md:gap-4 ${isOriginal ? 'bg-surface-200' : 'bg-surface-100'}`}
     >
-      <div className="flex items-center gap-2 justify-end">
-        <div className="flex gap-3">
+      <div className="flex items-center gap-2 justify-end flex-wrap">
+        <div className="flex gap-2 md:gap-3">
           <button
             onClick={copyToClipboard}
             className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"

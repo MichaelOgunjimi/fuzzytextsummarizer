@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Sidebar({ summaries, id }) {
+export default function Sidebar({ summaries, id, onClose }) {
   const navigate = useNavigate();
   const onStartAddSummary = () => {
     navigate('/');
@@ -9,10 +9,21 @@ export default function Sidebar({ summaries, id }) {
   return (
     <>
       {/* Mobile backdrop overlay */}
-      <div className="fixed inset-0 bg-black/40 z-20 md:hidden" />
+      <div className="fixed inset-0 bg-black/40 z-20 md:hidden" onClick={onClose} />
 
       <aside className="fixed top-20 left-0 h-[calc(100vh-5rem)] w-full md:w-72 bg-surface-100 text-text-800 transition-all duration-300 ease-in-out z-30">
         <div className="p-6 flex flex-col h-full">
+          {/* Mobile close button */}
+          <button
+            onClick={onClose}
+            className="md:hidden absolute top-4 right-4 p-2 rounded bg-surface-200 hover:bg-surface-300 text-text-600"
+            aria-label="Close sidebar"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-2">

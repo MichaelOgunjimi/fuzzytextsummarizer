@@ -96,7 +96,7 @@ const App = () => {
   }, [userUid]);
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full bg-surface-100">
       <Header />
       <Routes>
         <Route

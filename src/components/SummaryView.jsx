@@ -68,7 +68,7 @@ const SummaryView = ({ summaries }) => {
 
   return (
     <div className="bg-surface-100 min-h-screen">
-      {sidebarOpen && <Sidebar summaries={summaries} id={id} />}
+      {sidebarOpen && <Sidebar summaries={summaries} id={id} onClose={() => setSidebarOpen(false)} />}
       <ToggleButton sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <MainContent
         sidebarOpen={sidebarOpen}
@@ -86,7 +86,7 @@ const SummaryView = ({ summaries }) => {
 
 const ToggleButton = ({ sidebarOpen, setSidebarOpen }) => (
   <div
-    className={`fixed left-0 top-1/2 transform -translate-y-1/2 transition-all duration-300 z-40 ${sidebarOpen ? 'translate-x-0 md:translate-x-72' : 'translate-x-0'}`}
+    className={`fixed left-0 top-1/2 transform -translate-y-1/2 transition-all duration-300 z-40 ${sidebarOpen ? 'hidden md:block md:translate-x-72' : 'translate-x-0'}`}
   >
     <button
       onClick={() => setSidebarOpen(!sidebarOpen)}
