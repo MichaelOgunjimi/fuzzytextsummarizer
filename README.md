@@ -1,93 +1,119 @@
-# Text Summarizer
+# LingoSummar
 
-Text Summarizer is a web application that allows users to summarize text documents using advanced natural language processing techniques. The application provides a user-friendly interface for uploading text files or entering text directly, and generates concise summaries based on the input.
+React frontend for LingoSummar — a text summarization web app. Paste text or upload a file (TXT, PDF, DOCX) and get a concise summary powered by the LingoSummar API.
+
+**Live app:** <https://lingosummar.michaelogunjimi.com>  
+**API:** <https://lingosummar-api.fastapicloud.dev/api/v1>
+
+---
+
+## Tech Stack
+
+- **Framework:** React 18 + Vite
+- **Routing:** React Router v6
+- **Styling:** Tailwind CSS
+- **HTTP:** Axios, Fetch API
+- **File Upload:** react-dropzone
+- **Deployment:** Netlify
+
+---
 
 ## Features
 
-- Upload text files (supported formats: TXT, PDF, DOC, DOCX) or enter text directly
-- Specify the desired compression percentage for the summary
-- Generate summaries using fuzzy logic and other advanced NLP techniques
-- View and manage previous summaries
-- Responsive and intuitive user interface
+- Paste text or upload TXT, PDF, or DOCX files
+- Set summary compression percentage (30–80%)
+- Animated typing effect on summary reveal
+- Optional save history — toggle on/off with a Firebase UID stored in localStorage
+- Re-summarize any saved text at a different compression level
+- Responsive, mobile-first UI
 
-## Technologies Used
+---
 
-- Frontend:
-    - React: JavaScript library for building user interfaces
-    - Tailwind CSS: Utility-first CSS framework for rapid UI development
-    - Axios: HTTP client for making API requests
-    - React Router: Library for handling navigation in a React application
-    - Vite: Fast build tool and development server
+## Project Structure
 
-- Backend:
-    - Python: Programming language for backend development
-    - Flask: Web framework for building APIs and handling requests
-    - MongoDB Atlas: Cloud-based database service for storing text data and summaries
+```
+src/
+├── App.jsx                   # Root component, routing, global state
+├── main.jsx                  # React entry point
+├── config/
+│   └── api.js               # API base URL and endpoint definitions
+└── components/
+    ├── Header.jsx
+    ├── SummaryForm.jsx       # Text input + file upload form
+    ├── TypingSummary.jsx     # Animated summary display
+    ├── Summary.jsx           # Summary card
+    ├── SummaryView.jsx       # Detail view for a saved summary
+    ├── Sidebar.jsx
+    └── utilities/            # Button, Spinner, Toggle, InputComponent, etc.
+```
 
-- Deployment:
-    - Render: Platform for hosting and deploying the backend server
-    - Netlify: Platform for hosting and deploying the frontend application
+---
 
 ## Getting Started
 
-To run the Text Summarizer application locally, follow these steps:
+### Prerequisites
 
-1. Clone the repository: git clone https://github.com/michaelogunjimi/textsummarizer.git
+- Node.js 18+
+- npm
 
-2. Navigate to the project directory: cd textsummarizer
+### 1. Install dependencies
 
-3. Install the dependencies: npm install
+```bash
+cd frontend
+npm install
+```
 
-4. Set up the backend:
-- Navigate to the `backend` directory:
-  ```
-  cd backend
-  ```
-- Create a virtual environment:
-  ```
-  python -m venv venv
-  ```
-- Activate the virtual environment:
-    - For Windows:
-      ```
-      venv\Scripts\activate
-      ```
-    - For macOS and Linux:
-      ```
-      source venv/bin/activate
-      ```
-- Install the backend dependencies:
-  ```
-  pip install -r requirements.txt
-  ```
-- Set up the necessary environment variables for the backend, such as database connection details and API keys.
+### 2. Configure environment
 
-5. Start the development server: npm start
+Create a `.env.local` for local development:
 
-This command will concurrently run the backend server and the frontend development server.
+```env
+VITE_API_BASE_URL=http://127.0.0.1:8000/api/v1
+```
 
-6. Open your web browser and visit `http://localhost:3000` to access the Text Summarizer application.
+### 3. Start the dev server
 
-## Deployment
+```bash
+npm start
+```
 
-The Text Summarizer application is deployed using the following services:
+App runs at <http://localhost:3000>. The API base URL defaults to `http://127.0.0.1:8000/api/v1` in development (override with `VITE_API_BASE_URL`).
 
-- Backend: The backend server is deployed on Render, a platform for hosting and deploying web applications. It provides scalability, reliability, and easy deployment options.
+---
 
-- Frontend: The frontend application is deployed on Netlify, a platform for hosting and deploying static websites and web applications. It offers continuous deployment, global CDN, and other features for optimized performance.
+## Available Scripts
 
-To deploy your own instance of the Text Summarizer application, you'll need to set up accounts with Render and Netlify, configure the necessary environment variables, and follow their respective deployment guides.
+| Script | Description |
+|--------|-------------|
+| `npm start` | Start Vite dev server on port 3000 |
+| `npm run build` | Build for production → `dist/` |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint with auto-fix |
 
-## Contributing
+---
 
-Contributions to the Text Summarizer project are welcome! If you find any bugs, have suggestions for improvements, or want to add new features, please open an issue or submit a pull request. Make sure to follow the project's code style and guidelines.
+## Deployment (Netlify)
+
+The app deploys automatically from the `main` branch.
+
+- **Build command:** `npm run build`
+- **Publish directory:** `dist`
+
+The production API URL (`https://lingosummar-api.fastapicloud.dev/api/v1`) is hardcoded in `src/config/api.js` for production builds — no Netlify env var is needed.
+
+---
+
+## API Configuration
+
+All endpoints are defined in `src/config/api.js`. The base URL switches automatically between dev and prod:
+
+```js
+// Development  →  VITE_API_BASE_URL || http://127.0.0.1:8000/api/v1
+// Production   →  https://lingosummar-api.fastapicloud.dev/api/v1
+```
+
+---
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-If you have any questions, suggestions, or feedback, please feel free to contact the project maintainer at [your-email@example.com](mailto:your-email@example.com).
-
-Happy summarizing!
+MIT
