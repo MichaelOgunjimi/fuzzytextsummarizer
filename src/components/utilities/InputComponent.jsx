@@ -82,7 +82,7 @@ const InputComponent = ({ file }) => {
         code: error.code,
         url: API_ENDPOINTS.UPLOAD,
       });
-      setMessage(`Error: ${error.response?.data.error || error.message}`);
+      setMessage(`Error: ${error.response?.data?.detail || error.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +115,7 @@ const InputComponent = ({ file }) => {
         code: error.code,
         url: API_ENDPOINTS.SUMMARIZE,
       });
-      setMessage(`Error: ${error.response?.data.error || error.message}`);
+      setMessage(`Error: ${error.response?.data?.detail || error.message}`);
     } finally {
       setIsLoading(false);
     }

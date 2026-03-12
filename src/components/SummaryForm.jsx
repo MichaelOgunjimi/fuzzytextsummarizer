@@ -254,7 +254,7 @@ const SummaryForm = ({ summaries, isSavingEnabled, isLoading }) => {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <p className="font-semibold text-text-900 truncate group-hover:text-orange-500 transition-colors">
-                                    {summary.title}
+                                    {summary.uploaded_filename || summary.content_preview || 'Untitled'}
                                   </p>
                                   <p className="text-xs text-text-500 mt-1">
                                     {new Date(

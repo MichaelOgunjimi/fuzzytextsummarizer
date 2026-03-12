@@ -47,14 +47,15 @@ const SummaryView = ({ summaries }) => {
   async function summarizeAgain() {
     setIsLoading(true);
     try {
-      const response = await fetch(API_ENDPOINTS.SUMMARIZE_AGAIN(id), {
+      const url = percentage
+        ? `${API_ENDPOINTS.SUMMARIZE_AGAIN(id)}?percentage=${Number(percentage)}`
+        : API_ENDPOINTS.SUMMARIZE_AGAIN(id);
+      const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ percentage: Number(percentage) }),
       });
       if (!response.ok) throw new Error('Failed to fetch summary');
       const data = await response.json();
-      handleSummarizeAgain(data.summary);
+      handleSummarizeAgain(data);
     } catch (err) {
       console.error('Error fetching summary:', err);
     } finally {
@@ -108,7 +109,7 @@ const MainContent = ({
   summarizeAgain,
   isLoading,
   lastUpdated,
-  typingComplete,
+  handleTypingComplete,
 }) => {
   const summaryContentRef = useRef(null);
 
@@ -120,7 +121,7 @@ const MainContent = ({
           summaryContentRef.current.scrollHeight;
       }, 100);
     }
-  }, [currentSummary, isLoading, typingComplete, lastUpdated]);
+  }, [currentSummary, isLoading, handleTypingComplete, lastUpdated]);
 
   return (
     <div
@@ -173,7 +174,7 @@ const MainContent = ({
                       <TypingSummary
                         key={summary.id}
                         summary={summary}
-                        onTypingComplete={typingComplete}
+                        onTypingComplete={handleTypingComplete}
                       />
                     ) : (
                       <Summary

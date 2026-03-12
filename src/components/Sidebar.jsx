@@ -115,9 +115,10 @@ export default function Sidebar({ summaries, id, onClose }) {
                       </span>
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm font-semibold truncate leading-tight ${isActive ? 'text-text-950' : 'text-text-700 group-hover:text-text-900'}`}>
-                          {summary.title.length > 32
-                            ? summary.title.substring(0, 32) + '…'
-                            : summary.title}
+                          {(() => {
+                            const label = summary.uploaded_filename || summary.content_preview || 'Untitled';
+                            return label.length > 32 ? label.substring(0, 32) + '…' : label;
+                          })()}
                         </p>
                         <div className="flex items-center gap-2 mt-1.5">
                           <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
