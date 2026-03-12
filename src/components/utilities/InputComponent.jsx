@@ -57,7 +57,7 @@ const InputComponent = ({ file }) => {
     const headers = { 'X-User-UID': localStorage.getItem('userUid') };
     const formData = new FormData();
     formData.append('file', internalFile);
-    formData.append('percentage', Number(percentage));
+    formData.append('percentage', percentage ? Number(percentage) : 50);
 
     console.log('📤 Uploading file to:', API_ENDPOINTS.UPLOAD);
     setIsLoading(true);
@@ -96,7 +96,7 @@ const InputComponent = ({ file }) => {
     try {
       const response = await axios.post(
         API_ENDPOINTS.SUMMARIZE,
-        { text, percentage: Number(percentage) },
+        { text, percentage: percentage ? Number(percentage) : null },
         { headers },
       );
       console.log('✅ Summarize successful:', response.data);
