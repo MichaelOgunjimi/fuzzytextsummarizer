@@ -4,14 +4,6 @@ const API_BASE_URL = isDevelopment
   ? import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/v1'
   : 'https://lingosummar-api.fastapicloud.dev/api/v1';
 
-// Debug logging
-console.log('🔧 API Configuration:', {
-  MODE: import.meta.env.MODE,
-  isDevelopment,
-  VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
-  API_BASE_URL: API_BASE_URL,
-});
-
 export const API_ENDPOINTS = {
   SUMMARIZE: `${API_BASE_URL}/summarize`,
   UPLOAD: `${API_BASE_URL}/upload`,

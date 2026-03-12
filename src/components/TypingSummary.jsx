@@ -5,12 +5,17 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [displayedText, setDisplayedText] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [copied, setCopied] = useState(false);
   const typingSpeed = 10; // Typing speed in milliseconds
 
   // Function to copy text to the clipboard
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(summary.content);
-    alert('Text copied to clipboard!');
+    navigator.clipboard.writeText(summary.content)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {});
   };
 
   const toggleSpeak = () => {
@@ -50,7 +55,7 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
     let timeoutId;
     if (summary.content && displayedText.length < summary.content.length) {
       timeoutId = setTimeout(() => {
-        setDisplayedText(summary.content.substr(0, displayedText.length + 1));
+        setDisplayedText(summary.content.slice(0, displayedText.length + 1));
       }, typingSpeed);
     } else if (summary.content && displayedText.length === summary.content.length) {
       if (onTypingComplete) {
@@ -70,7 +75,7 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
             className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"
             title="Copy to clipboard"
           >
-            <CopyIcon />
+            {copied ? <span className="text-xs font-semibold text-orange-500">Copied!</span> : <CopyIcon />}
           </button>
           <button
             className="text-text-400 hover:text-orange-500 transition-colors p-2 hover:bg-surface-300 rounded"

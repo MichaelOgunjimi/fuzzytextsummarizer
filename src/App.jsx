@@ -28,8 +28,7 @@ const App = () => {
       const data = await response.json();
       setSummaries(data);
     } catch (err) {
-      console.error('Error fetching summaries:', err);
-      // Optionally update the UI to show an error message
+      if (import.meta.env.DEV) console.error('Error fetching summaries:', err);
     } finally {
       setIsLoading(false); // Ensure isLoading is always set to false
     }

@@ -15,6 +15,7 @@ const SummaryView = ({ summaries }) => {
   const [percentage, setPercentage] = useState('');
   const [typingComplete, setTypingComplete] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [reloadError, setReloadError] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -39,12 +40,13 @@ const SummaryView = ({ summaries }) => {
       setCurrentSummary(data);
       setIsLoading(false);
     } catch (err) {
-      console.error('Error fetching summary:', err);
+      if (import.meta.env.DEV) console.error('Error fetching summary:', err);
       setIsLoading(false);
     }
   }
 
   async function summarizeAgain() {
+    setReloadError('');
     setIsLoading(true);
     try {
       const url = percentage
@@ -57,7 +59,8 @@ const SummaryView = ({ summaries }) => {
       const data = await response.json();
       handleSummarizeAgain(data);
     } catch (err) {
-      console.error('Error fetching summary:', err);
+      if (import.meta.env.DEV) console.error('Error fetching summary:', err);
+      setReloadError('Failed to regenerate summary. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -80,6 +83,7 @@ const SummaryView = ({ summaries }) => {
         isLoading={isLoading}
         lastUpdated={lastUpdated}
         handleTypingComplete={handleTypingComplete}
+        reloadError={reloadError}
       />
     </div>
   );
@@ -110,6 +114,7 @@ const MainContent = ({
   isLoading,
   lastUpdated,
   handleTypingComplete,
+  reloadError,
 }) => {
   const summaryContentRef = useRef(null);
 
@@ -164,11 +169,10 @@ const MainContent = ({
                 {currentSummary.summaries &&
                   currentSummary.summaries.map((summary, index) => {
                     const isLatestOrOnly =
-                      (lastUpdated &&
-                        summary.timestamp &&
-                        new Date(summary.timestamp).getTime() ===
-                          lastUpdated.getTime()) ||
-                      currentSummary.summaries.length === 1;
+                      lastUpdated &&
+                      summary.timestamp &&
+                      new Date(summary.timestamp).getTime() ===
+                        lastUpdated.getTime();
 
                     return isLatestOrOnly ? (
                       <TypingSummary
@@ -207,6 +211,7 @@ const MainContent = ({
           summarizeAgain={summarizeAgain}
           isLoading={isLoading}
         />
+        {reloadError && <p className="text-red-500 text-sm mt-2">{reloadError}</p>}
       </div>
     </div>
   );
