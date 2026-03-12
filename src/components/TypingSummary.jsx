@@ -9,14 +9,14 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
 
   // Function to copy text to the clipboard
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(summary.text);
+    navigator.clipboard.writeText(summary.content);
     alert('Text copied to clipboard!');
   };
 
   const toggleSpeak = () => {
     if ('speechSynthesis' in window) {
       if (!isSpeaking) {
-        const utterance = new SpeechSynthesisUtterance(summary.text);
+        const utterance = new SpeechSynthesisUtterance(summary.content);
         utterance.voice = speechSynthesis
           .getVoices()
           .find((voice) => voice.lang === 'en-US'); // Optionally set the voice
@@ -35,6 +35,7 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
 
   // Function to format the date
   const formatDate = (dateString) => {
+    if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -47,17 +48,17 @@ const TypingSummary = ({ summary, onTypingComplete }) => {
   // UseEffect to handle the typing effect
   useEffect(() => {
     let timeoutId;
-    if (summary.text && displayedText.length < summary.text.length) {
+    if (summary.content && displayedText.length < summary.content.length) {
       timeoutId = setTimeout(() => {
-        setDisplayedText(summary.text.substr(0, displayedText.length + 1));
+        setDisplayedText(summary.content.substr(0, displayedText.length + 1));
       }, typingSpeed);
-    } else if (displayedText.length === summary.text.length) {
+    } else if (summary.content && displayedText.length === summary.content.length) {
       if (onTypingComplete) {
         onTypingComplete();
       }
     }
     return () => clearTimeout(timeoutId);
-  }, [summary.text, displayedText, onTypingComplete]);
+  }, [summary.content, displayedText, onTypingComplete]);
 
   return (
     <div className="p-4 md:p-6 bg-surface-100 rounded mb-4 relative flex flex-col">

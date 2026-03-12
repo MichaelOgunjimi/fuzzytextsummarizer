@@ -11,7 +11,7 @@ import { API_ENDPOINTS } from '../config/api.js';
 const SummaryView = ({ summaries }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentSummary, setCurrentSummary] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [percentage, setPercentage] = useState('');
   const [typingComplete, setTypingComplete] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -142,7 +142,7 @@ const MainContent = ({
           className="flex-1 overflow-auto scrollbar bg-surface-50 rounded p-4 md:p-6 space-y-6"
           ref={summaryContentRef}
         >
-          {currentSummary.length === 0 ? (
+          {!currentSummary.id ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
                 <Spinner size={3} />
@@ -154,7 +154,7 @@ const MainContent = ({
               <>
                 <Summary
                   summary={{
-                    text: currentSummary.text,
+                    text: currentSummary.content,
                     created_at: currentSummary.created_at,
                     uploaded_filename: currentSummary.uploaded_filename,
                   }}

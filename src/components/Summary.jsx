@@ -7,13 +7,13 @@ export default function Summary({ summary, isOriginal }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(summary.text);
+    navigator.clipboard.writeText(summary.text ?? summary.content);
   };
 
   const toggleSpeak = () => {
     if ('speechSynthesis' in window) {
       if (!isSpeaking) {
-        const utterance = new SpeechSynthesisUtterance(summary.text);
+      const utterance = new SpeechSynthesisUtterance(summary.text ?? summary.content);
         utterance.voice = speechSynthesis
           .getVoices()
           .find((voice) => voice.lang === 'en-US'); // Optionally set the voice
@@ -30,6 +30,7 @@ export default function Summary({ summary, isOriginal }) {
     }
   };
   const formatDate = (dateString) => {
+    if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -84,7 +85,7 @@ export default function Summary({ summary, isOriginal }) {
         <p
           className={`text-text-700 mb-2 leading-relaxed ${isOriginal ? 'font-medium' : ''}`}
         >
-          {summary.text}
+          {summary.text ?? summary.content}
         </p>
       )}
 
