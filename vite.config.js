@@ -9,7 +9,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'https://www.api.lingosummar.com',
+        target: 'https://lingosummar-api.fastapicloud.dev',
         changeOrigin: true,
       },
     },

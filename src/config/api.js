@@ -1,8 +1,8 @@
 // API Configuration
 const isDevelopment = import.meta.env.MODE === 'development';
 const API_BASE_URL = isDevelopment
-  ? import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:5500/api/v1'
-  : 'https://lingosummarapi.michaelogunjimi.com/api/v1';
+  ? import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/v1'
+  : 'https://lingosummar-api.fastapicloud.dev/api/v1';
 
 // Debug logging
 console.log('🔧 API Configuration:', {
