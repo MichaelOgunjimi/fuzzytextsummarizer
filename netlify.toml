@@ -3,3 +3,8 @@ from = "/api/*"
 to = "https://lingosummar-api.fastapicloud.dev/api/v1/:splat"
 status = 200
 force = true
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
