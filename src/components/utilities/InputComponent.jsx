@@ -59,14 +59,12 @@ const InputComponent = ({ file }) => {
     formData.append('file', internalFile);
     formData.append('percentage', percentage ? Number(percentage) : 50);
 
-    console.log('📤 Uploading file to:', API_ENDPOINTS.UPLOAD);
     setIsLoading(true);
     setMessage('Uploading...');
     try {
       const response = await axios.post(API_ENDPOINTS.UPLOAD, formData, {
         headers: { ...headers, 'Content-Type': 'multipart/form-data' },
       });
-      console.log('✅ Upload successful:', response.data);
       setMessage(response.data.message);
       // Navigate to the summary view page after receiving the response
       if (response.data.id) {
@@ -75,8 +73,7 @@ const InputComponent = ({ file }) => {
         navigate(`/summary/${response.data.id}`);
       }
     } catch (error) {
-      console.error('❌ Upload error:', error);
-      console.error('Error details:', {
+      if (import.meta.env.DEV) console.error('❌ Upload error:', error, {
         message: error.message,
         response: error.response,
         code: error.code,
@@ -90,7 +87,6 @@ const InputComponent = ({ file }) => {
 
   const summarizeText = async () => {
     const headers = { 'X-User-UID': localStorage.getItem('userUid') };
-    console.log('📝 Summarizing text to:', API_ENDPOINTS.SUMMARIZE);
     setIsLoading(true);
     setMessage('Summarizing...');
     try {
@@ -99,7 +95,6 @@ const InputComponent = ({ file }) => {
         { text, percentage: percentage ? Number(percentage) : null },
         { headers },
       );
-      console.log('✅ Summarize successful:', response.data);
       setMessage(response.data.message);
       // Navigate to the summary view page after receiving the response
       if (response.data.id) {
@@ -108,8 +103,7 @@ const InputComponent = ({ file }) => {
         navigate(`/summary/${response.data.id}`);
       }
     } catch (error) {
-      console.error('❌ Summarize error:', error);
-      console.error('Error details:', {
+      if (import.meta.env.DEV) console.error('❌ Summarize error:', error, {
         message: error.message,
         response: error.response,
         code: error.code,

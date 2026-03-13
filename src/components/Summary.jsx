@@ -7,7 +7,8 @@ export default function Summary({ summary, isOriginal }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(summary.text ?? summary.content);
+    navigator.clipboard.writeText(summary.text ?? summary.content)
+      .catch(() => {});
   };
 
   const toggleSpeak = () => {
